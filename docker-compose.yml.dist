@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  ms-comp-account-movement:
+    image: your_account_movement_image:latest
+    container_name: ms-comp-account-movement
+    ports:
+      - "8586:8080"  # Mapea el puerto 8080 del contenedor al puerto 8586 en el host
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/DBNTTDATATECHNICALTESTLF
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=your_password
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+      - SPRING_PROFILES_ACTIVE=prod
+    depends_on:
+      - db
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
